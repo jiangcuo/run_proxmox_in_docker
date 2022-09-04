@@ -34,7 +34,6 @@ dpkg -e pve-manager_7.2-7_amd64.deb /tmp/pve-manager/DEBIAN && \
 sed -i "s/ifupdown2 (>= 2.0.1-1+pve8) | ifenslave (>= 2.6),//g" /tmp/pve-manager/DEBIAN/control && \
 dpkg-deb -Zxz  -b /tmp/pve-manager/ /tmp
 
-
 #intall proxmox-ve without recommends. ifupdown2 will install failed but ok
 RUN apt-get update && \
 DEBIAN_FRONTEND=noninteractiv apt-get -y --no-install-recommends  install  proxmox-ve || echo ok
@@ -46,7 +45,7 @@ RUN dpkg -i /tmp/*.deb || echo ok
 RUN echo "root:root"|chpasswd
 
 #clean
-RUN rm -rf /var/lib/apt/lists/*
+RUN rm -rf /var/lib/apt/lists/*  /*.deb
 
 #use setup.sh to start proxmox service
 STOPSIGNAL SIGINT
