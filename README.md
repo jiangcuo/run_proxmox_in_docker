@@ -16,9 +16,12 @@ registry.cn-chengdu.aliyuncs.com/bingsin/pve:test-7.2-7
 ### RUN privileged
 ```
 docker run -idt --network host \
---privileged
+--privileged \
 --name pve \
 --add-host pve:10.13.14.101 \
 --hostname pve \
 registry.cn-chengdu.aliyuncs.com/bingsin/pve:test-7.2-7
 ```
+
+**NOTE**
+JUST FOR FUN
