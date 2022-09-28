@@ -1,0 +1,38 @@
+FROM debian:11
+
+#set mirror
+RUN rm /etc/apt/sources.list && \
+echo "deb http://mirrors.ustc.edu.cn/debian/ bullseye main contrib non-free" >> /etc/apt/sources.list && \
+echo "deb http://mirrors.ustc.edu.cn/debian/ bullseye-updates main contrib non-free" >> /etc/apt/sources.list && \
+echo "deb http://mirrors.ustc.edu.cn/debian/ bullseye-backports main contrib non-free" >> /etc/apt/sources.list && \
+echo "deb http://mirrors.ustc.edu.cn/debian-security bullseye-security main contrib" >> /etc/apt/sources.list
+
+#install base pkg
+RUN apt-get update && \
+apt-get install wget systemctl nano vim  curl gnupg  ca-certificates -y
+
+#add proxmox repo
+
+#use pimox https://github.com/pimox/pimox7
+#RUN echo "deb https://raw.githubusercontent.com/pimox/pimox7/master/ dev/" > /etc/apt/sources.list.d/pimox.list && \
+#curl https://raw.githubusercontent.com/pimox/pimox7/master/KEY.gpg | apt-key add -
+
+#use foxi_proxmox_arm64   https://git.apqa.cn:8008/pve/proxmox-arm
+RUN echo "deb https://foxi.buduanwang.vip/pan/foxi/Virtualization/proxmox/foxi/ bullseye main">/etc/apt/sources.list.d/foxi.list && \
+curl -L  https://foxi.buduanwang.vip/pan/foxi/Virtualization/proxmox/foxi/gpg.key |apt-key add -
+
+
+#intall proxmox-ve without recommends. 
+RUN apt-get update && \
+DEBIAN_FRONTEND=noninteractiv apt-get -y --no-install-recommends  install  proxmox-ve || echo ok
+
+
+#set passwd for root
+RUN echo "root:root"|chpasswd
+
+#clean
+RUN rm -rf /var/lib/apt/lists/*  /*.deb
+
+#use setup.sh to start proxmox service
+STOPSIGNAL SIGINT
+CMD [ "/lib/systemd/systemd", "log-level=info", "unit=sysinit.target"]

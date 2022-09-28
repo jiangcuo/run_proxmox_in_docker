@@ -25,13 +25,14 @@ registry.cn-chengdu.aliyuncs.com/bingsin/pve:test-7.2-7
 
 ### FOR AARCH64
 
+```
 docker run -idt --network host \
 --privileged \
 --name pve \
 --add-host pve:10.13.14.101 \
 --hostname pve \
 registry.cn-chengdu.aliyuncs.com/bingsin/pve:aarch64-7.2-7
-
+```
 
 **NOTE**
 JUST FOR FUN

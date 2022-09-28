@@ -9,7 +9,7 @@ echo "deb http://mirrors.ustc.edu.cn/debian-security bullseye-security main cont
 
 #install base pkg
 RUN apt-get update && \
-apt-get install wget sudo systemctl nano vim   curl gnupg  ca-certificates -y
+apt-get install wget  systemctl nano vim  curl gnupg  ca-certificates -y
 
 #add proxmox repo
 RUN echo "deb http://mirrors.ustc.edu.cn/proxmox/debian/ bullseye pve-no-subscription" >>/etc/apt/sources.list && \
