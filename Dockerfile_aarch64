@@ -13,13 +13,9 @@ apt-get install wget systemctl nano vim  curl gnupg  ca-certificates -y
 
 #add proxmox repo
 
-#use pimox https://github.com/pimox/pimox7
-#RUN echo "deb https://raw.githubusercontent.com/pimox/pimox7/master/ dev/" > /etc/apt/sources.list.d/pimox.list && \
-#curl https://raw.githubusercontent.com/pimox/pimox7/master/KEY.gpg | apt-key add -
-
-#use foxi_proxmox_arm64   https://git.apqa.cn:8008/pve/proxmox-arm
-RUN echo "deb https://foxi.buduanwang.vip/pan/foxi/Virtualization/proxmox/foxi/ bullseye main">/etc/apt/sources.list.d/foxi.list && \
-curl -L  https://foxi.buduanwang.vip/pan/foxi/Virtualization/proxmox/foxi/gpg.key |apt-key add -
+#use jiangcuo_proxmox_arm64 https://github.com/jiangcuo/Proxmox-Arm64
+RUN echo "deb https://mirrors.apqa.cn/proxmox/ pvearm  main">/etc/apt/sources.list.d/foxi.list && \
+curl -L https://mirrors.apqa.cn/proxmox/gpg.key |apt-key add -
 
 
 #intall proxmox-ve without recommends. 
